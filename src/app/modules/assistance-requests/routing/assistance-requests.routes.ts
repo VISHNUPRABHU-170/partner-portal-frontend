@@ -7,33 +7,39 @@ export const assistanceRequestRoutes: Route[] = [
     pathMatch: 'full',
   },
   {
-    path: 'support-form',
-    loadComponent: () => import('../components/support-request/support-form/support-form.component').then(c => c.SupportFormComponent),
-  },
-  {
     path: 'support-dashboard',
+    title: 'Support Dashboard',
     loadComponent: () => import('../components/support-request/support-dashboard/support-dashboard.component').then(c => c.SupportDashboardComponent),
   },
   {
-    path: 'feature-request-form',
+    path: 'support-form',
+    title: 'Support Request',
+    loadComponent: () => import('../components/support-request/support-form/support-form.component').then(c => c.SupportFormComponent),
+  },
+  {
+    path: 'support-ticket-view',
+    title: 'Support Ticket',
     loadComponent: () =>
-      import('../components/feature-request/feature-request-form/feature-request-form.component').then(c => c.FeatureRequestFormComponent),
+      import('../components/support-request/support-ticket-view/support-ticket-view.component').then(c => c.SupportTicketViewComponent),
   },
   {
     path: 'feature-request-dashboard',
+    title: 'Feature Dashboard',
     loadComponent: () =>
       import('../components/feature-request/feature-request-dashboard/feature-request-dashboard.component').then(
         c => c.FeatureRequestDashboardComponent
       ),
   },
   {
-    path: 'feature-ticket-view',
+    path: 'feature-request-form',
+    title: 'Feature Request',
     loadComponent: () =>
-      import('../components/feature-request/feature-ticket-view/feature-ticket-view.component').then(c => c.FeatureTicketViewComponent),
+      import('../components/feature-request/feature-request-form/feature-request-form.component').then(c => c.FeatureRequestFormComponent),
   },
   {
-    path: 'support-ticket-view',
+    path: 'feature-ticket-view',
+    title: 'Feature Ticket',
     loadComponent: () =>
-      import('../components/support-request/support-ticket-view/support-ticket-view.component').then(c => c.SupportTicketViewComponent),
+      import('../components/feature-request/feature-ticket-view/feature-ticket-view.component').then(c => c.FeatureTicketViewComponent),
   },
 ];

@@ -9,7 +9,7 @@ export const backIconConfig: IconComponentModel = {
 
 export const updateButtonConfig: ButtonComponentModel = {
   label: 'Update Ticket',
-  routerLink: ''
+  routerLink: '',
 };
 
 export const progressBarConfig: ProgressBarComponentModel = {
