@@ -81,5 +81,6 @@ export class AuthService {
   onLogOut(): void {
     this.storageService.removeSessionItem('authToken');
     this.navigationService.navigate('login');
+    this.toasterService.showSuccess('Logged out successfully');
   }
 }
