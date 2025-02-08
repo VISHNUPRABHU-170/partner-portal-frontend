@@ -34,7 +34,7 @@ export class AuthService {
       next: (response: HttpResponse<null>) => {
         this.spinnerBehaviorSubject.next(false);
         if (response.success === true) {
-          this.storageService.setSessionItem('token', response.token);
+          this.storageService.setSessionItem('authToken', response.token);
           this.navigationService.navigate('partner-portal');
         }
         this.toasterService.showSuccess(response.message);
