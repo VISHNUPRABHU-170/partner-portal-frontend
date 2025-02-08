@@ -1,3 +1,3 @@
 @if (data) {
-  <mat-icon (click)="onClick()" [routerLink]="data.routerLink">{{ data.name }}</mat-icon>
+  <mat-icon (click)="onClick()" [routerLink]="data.routerLink" [className]="data.className">{{ data.name }}</mat-icon>
 }

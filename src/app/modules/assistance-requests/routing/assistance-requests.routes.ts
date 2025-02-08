@@ -41,5 +41,5 @@ export const assistanceRequestRoutes: Route[] = [
     title: 'Feature Ticket',
     loadComponent: () =>
       import('../components/feature-request/feature-ticket-view/feature-ticket-view.component').then(c => c.FeatureTicketViewComponent),
-  }
+  },
 ];

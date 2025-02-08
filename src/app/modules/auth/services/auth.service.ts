@@ -26,6 +26,30 @@ export class AuthService {
   ) {}
 
   /**
+   * Method to handle user registration
+   * @param data - Registration data (email, password, etc.)
+   */
+  onRegister(data: RegisterDataModel): void {
+    const Subscription = this.restApiService.post(this.authRegisterURL, data).subscribe({
+      next: (response: HttpResponse<null>) => {
+        this.spinnerBehaviorSubject.next(false);
+        if (response.success == true) {
+          this.navigationService.navigate('login');
+        }
+        this.toasterService.showSuccess(response.message);
+      },
+      error: (response: HttpErrorResponse) => {
+        // Handle error response
+        this.spinnerBehaviorSubject.next(false);
+        this.toasterService.showError(response.error.message);
+      },
+    });
+    this.destroyRef.onDestroy(() => {
+      Subscription?.unsubscribe();
+    });
+  }
+
+  /**
    * Method to handle user login
    * @param data - Login data (email and password)
    */
@@ -51,26 +75,11 @@ export class AuthService {
   }
 
   /**
-   * Method to handle user registration
-   * @param data - Registration data (email, password, etc.)
+   * Logs the user out by removing the authentication token from the session storage
+   * and navigating to the login page.
    */
-  onRegister(data: RegisterDataModel): void {
-    const Subscription = this.restApiService.post(this.authRegisterURL, data).subscribe({
-      next: (response: HttpResponse<null>) => {
-        this.spinnerBehaviorSubject.next(false);
-        if (response.success == true) {
-          this.navigationService.navigate('login');
-        }
-        this.toasterService.showSuccess(response.message);
-      },
-      error: (response: HttpErrorResponse) => {
-        // Handle error response
-        this.spinnerBehaviorSubject.next(false);
-        this.toasterService.showError(response.error.message);
-      },
-    });
-    this.destroyRef.onDestroy(() => {
-      Subscription?.unsubscribe();
-    });
+  onLogOut(): void {
+    this.storageService.removeSessionItem('authToken');
+    this.navigationService.navigate('login');
   }
 }

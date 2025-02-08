@@ -42,6 +42,5 @@ export class FeatureTicketViewComponent implements OnInit {
     });
   }
 
-  onUpdate(): void {
-  }
+  onUpdate(): void {}
 }

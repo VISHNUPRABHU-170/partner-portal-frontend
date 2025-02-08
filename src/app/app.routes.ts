@@ -12,7 +12,7 @@ export const routes: Routes = [
   {
     path: 'login',
     title: 'Login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'register',
@@ -29,6 +29,6 @@ export const routes: Routes = [
   {
     path: '**',
     redirectTo: 'login',
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
 ];
