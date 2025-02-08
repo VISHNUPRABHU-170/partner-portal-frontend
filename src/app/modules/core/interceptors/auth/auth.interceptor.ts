@@ -14,7 +14,7 @@ import { environments } from '../../../../environments/environment';
  */
 export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
   const storageService = inject(StorageService);
-  const token = storageService.getSessionItem('token');
+  const token = storageService.getSessionItem('authToken');
   const accessToken = environments.ACCESS_TOKEN;
   let modifiedReq: HttpRequest<any>;
   if (token) {
