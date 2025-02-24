@@ -49,6 +49,6 @@ export const loginFormConfig: FormBuilderComponentModel = {
 };
 
 export const progressBarConfig: ProgressBarComponentModel = {
-  diameter: 60,
+  diameter: 50,
   className: 'spinner-center',
 };
