@@ -1,24 +1,61 @@
-@if (ticketData) {
   <div class="feature-ticket-view">
+
     <mat-toolbar>
       <div>
         <app-icon [data]="backIconConfig"></app-icon>
-        <span>{{ ticketData.title }}</span>
+        <span>
+          @if(ticketData) { {{ ticketData.title }}}
+          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderHeaderConfig"></ngx-skeleton-loader> }
+        </span>
       </div>
       <app-button [data]="updateButtonConfig" (event)="onUpdate()"></app-button>
     </mat-toolbar>
+
     <mat-card appearance="outlined">
       <mat-card-content>
-        <span class="content"> <span class="title">Feature Title: </span>{{ ticketData.title }} </span>
-        <span class="content"> <span class="title">Feature Description: </span>{{ ticketData.description }} </span>
-        <span class="content"> <span class="title">Cloud Provider: </span>{{ ticketData.cloudProvider }} </span>
-        <span class="content"> <span class="title">Priority: </span>{{ ticketData.priority }} </span>
-        <span class="content"> <span class="title">Created At: </span>{{ ticketData.createdAt | date }} </span>
-        <span class="content"> <span class="title">Deadline: </span>{{ ticketData.deadLine | date }} </span>
-        <span class="content"> <span class="title">Tags: </span>{{ ticketData.tags }} </span>
+
+        <span class="content">
+          <span class="title">Feature Title: </span>
+          @if(ticketData) { {{ ticketData.title }}}
+          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
+        </span>
+
+        <span class="content">
+          <span class="title">Feature Description: </span>
+          @if(ticketData) { {{ ticketData.description }}}
+          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
+        </span>
+
+        <span class="content">
+          <span class="title">Cloud Provider: </span>
+          @if(ticketData) { {{ ticketData.cloudProvider }}}
+          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
+        </span>
+
+        <span class="content">
+          <span class="title">Priority: </span>
+          @if(ticketData) { {{ ticketData.priority }}}
+          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
+        </span>
+
+        <span class="content">
+          <span class="title">Created At: </span>
+          @if(ticketData) { {{ ticketData.createdAt | date }} }
+          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
+        </span>
+
+        <span class="content">
+          <span class="title">Deadline: </span>
+          @if(ticketData) { {{ ticketData.deadLine | date }} }
+          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
+        </span>
+
+        <span class="content">
+          <span class="title">Tags: </span>
+          @if(ticketData) { {{ ticketData.tags }} }
+          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
+        </span>
+
       </mat-card-content>
     </mat-card>
   </div>
-} @else {
-  <app-progress-bar [data]="progressBarConfig"></app-progress-bar>
-}

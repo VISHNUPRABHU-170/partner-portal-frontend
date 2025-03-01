@@ -4,12 +4,12 @@ import Highcharts from 'highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { BarChartComponentModel } from './bar-chart.component.model';
 import { ChartBuilderService } from '../../services/chart-builder/chart-builder.service';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { NgxSkeletonLoaderComponent } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-bar-chart',
   standalone: true,
-  imports: [HighchartsChartModule, MatCardModule, NgxSkeletonLoaderModule],
+  imports: [HighchartsChartModule, MatCardModule, NgxSkeletonLoaderComponent],
   providers: [ChartBuilderService],
   templateUrl: './bar-chart.component.html',
   styleUrl: './bar-chart.component.scss',
@@ -26,7 +26,7 @@ export class BarChartComponent implements OnChanges {
   // Holds the chart configuration options generated for Highcharts
   chartData!: Highcharts.Options;
 
-  skeletonLoaderConfig = { width: '320px', height: '320px', 'border-radius': '10px' };
+  skeletonLoaderConfig = { width: '320px', height: '320px', 'border-radius': '16px' };
 
   constructor(private chartBuilderService: ChartBuilderService) {}
 
