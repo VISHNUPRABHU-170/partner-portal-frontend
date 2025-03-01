@@ -20,6 +20,8 @@ export class SupportTicketChartsComponent implements OnInit {
 
   chartUtils = new ChartUtils();
 
+  isLoading = true;
+
   constructor(private supportRequestService: SupportRequestService) {}
 
   ngOnInit(): void {
@@ -29,6 +31,9 @@ export class SupportTicketChartsComponent implements OnInit {
 
   subscribeToSupportTicketStatus() {
     this.supportRequestService.ticketStatusBehaviorSubject.subscribe((ticketStatus: any) => {
+
+      if (!ticketStatus) return;
+
       const chartData = [
         {
           name: 'TODO',
@@ -54,6 +59,7 @@ export class SupportTicketChartsComponent implements OnInit {
         TICKET_STATUS_COLOR_MAPPER[TicketStatus.COMPLETED],
       ];
       this.barChartConfig = structuredClone(this.barChartConfig);
+      this.isLoading = false;
     });
   }
 }

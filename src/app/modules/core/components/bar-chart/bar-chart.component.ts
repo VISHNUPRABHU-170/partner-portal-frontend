@@ -18,11 +18,15 @@ export class BarChartComponent implements OnChanges {
   // Input property to accept chart configuration from the parent component
   @Input() chartConfig!: BarChartComponentModel;
 
+  @Input() isLoading!: boolean;
+
   // Reference to the Highcharts library for chart rendering
   Highcharts = Highcharts;
 
   // Holds the chart configuration options generated for Highcharts
   chartData!: Highcharts.Options;
+
+  skeletonLoaderConfig = { width: '320px', height: '320px', 'border-radius': '10px' };
 
   constructor(private chartBuilderService: ChartBuilderService) {}
 

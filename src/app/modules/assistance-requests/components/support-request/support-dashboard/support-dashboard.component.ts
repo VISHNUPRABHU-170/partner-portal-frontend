@@ -41,6 +41,8 @@ export class SupportDashboardComponent implements OnInit {
 
   chartUtils = new ChartUtils();
 
+  isChartDataLoading = true;
+
   constructor(
     private navigationService: NavigationService,
     private supportRequestService: SupportRequestService,
@@ -50,20 +52,23 @@ export class SupportDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.supportRequestService.getTicketStatus();
     this.supportRequestService.getTickets({ page: this.pageIndex, limit: 5 });
-    this.subscribeToFeatureTickets();
-    this.subscribeToFeatureTicketStatus();
+    this.subscribeToSupportTickets();
+    this.subscribeToSupportTicketStatus();
   }
 
-  subscribeToFeatureTicketStatus() {
+  subscribeToSupportTicketStatus() {
     const Subscription = this.supportRequestService.ticketStatusBehaviorSubject.subscribe((response: any) => {
-      this.updateChartConfig(response);
+      if (response) {
+        this.isChartDataLoading = false;
+        this.updateChartConfig(response);
+      }
     });
     this.destroyRef.onDestroy(() => {
       Subscription?.unsubscribe();
     });
   }
 
-  subscribeToFeatureTickets() {
+  subscribeToSupportTickets() {
     const Subscription = this.supportRequestService.ticketsBehaviorSubject.subscribe((data: any) => {
       if (data) {
         this.isTableDataLoading = false;

@@ -1,7 +1,7 @@
 <mat-card appearance="outlined">
   <mat-card-header>Feature Ticket</mat-card-header>
   <mat-card-content>
-    <app-pie-chart [chartConfig]="pieChartConfig"></app-pie-chart>
-    <app-bar-chart [chartConfig]="barChartConfig"></app-bar-chart>
+    <app-pie-chart [chartConfig]="pieChartConfig" [isLoading]="isLoading"></app-pie-chart>
+    <app-bar-chart [chartConfig]="barChartConfig" [isLoading]="isLoading"></app-bar-chart>
   </mat-card-content>
 </mat-card>

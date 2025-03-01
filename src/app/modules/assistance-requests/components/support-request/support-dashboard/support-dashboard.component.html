@@ -7,10 +7,10 @@
     <div class="chart-container">
       <span>Overall Summary - Support Request</span>
       <div class="charts">
-        <app-pie-chart [chartConfig]="toDoTicketChartConfig"></app-pie-chart>
-        <app-pie-chart [chartConfig]="inProgressTicketChartConfig"></app-pie-chart>
-        <app-pie-chart [chartConfig]="resolvedTicketChartConfig"></app-pie-chart>
-        <app-pie-chart [chartConfig]="totalTicketChartConfig"></app-pie-chart>
+        <app-pie-chart [chartConfig]="toDoTicketChartConfig" [isLoading]="isChartDataLoading"></app-pie-chart>
+        <app-pie-chart [chartConfig]="inProgressTicketChartConfig" [isLoading]="isChartDataLoading"></app-pie-chart>
+        <app-pie-chart [chartConfig]="resolvedTicketChartConfig" [isLoading]="isChartDataLoading"></app-pie-chart>
+        <app-pie-chart [chartConfig]="totalTicketChartConfig" [isLoading]="isChartDataLoading"></app-pie-chart>
       </div>
     </div>
     <div>

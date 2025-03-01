@@ -20,6 +20,8 @@ export class FeatureTicketChartsComponent implements OnInit {
 
   chartUtils = new ChartUtils();
 
+  isLoading = true;
+
   constructor(private featureRequestService: FeatureRequestService) {}
 
   ngOnInit(): void {
@@ -29,6 +31,9 @@ export class FeatureTicketChartsComponent implements OnInit {
 
   subscribeToFeatureTicketStatus() {
     this.featureRequestService.ticketStatusBehaviorSubject.subscribe((ticketStatus: any) => {
+
+      if (!ticketStatus) return;
+
       const chartData = [
         {
           name: 'AWS',
@@ -60,6 +65,7 @@ export class FeatureTicketChartsComponent implements OnInit {
         CLOUD_COLOR_MAPPER[CloudProviders.OTHERS].fails,
       ];
       this.barChartConfig = structuredClone(this.barChartConfig);
+      this.isLoading = false;
     });
   }
 }

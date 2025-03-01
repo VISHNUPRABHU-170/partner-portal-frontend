@@ -18,6 +18,8 @@ export class FeatureTicketTabComponent implements OnInit {
 
   chartUtils = new ChartUtils();
 
+  isLoading = true;
+
   constructor(private featureRequestService: FeatureRequestService) {}
 
   ngOnInit(): void {
@@ -60,5 +62,6 @@ export class FeatureTicketTabComponent implements OnInit {
       const centerTextData = { value: value, label: label };
       this[config as ConfigKeys] = this.chartUtils.updateChartConfig(chartData, centerTextData, this[config as ConfigKeys]);
     });
+    this.isLoading = false;
   }
 }
