@@ -4,16 +4,16 @@ import { ActivatedRoute } from '@angular/router';
 import { backIconConfig, progressBarConfig, updateButtonConfig } from './config';
 import { IconComponent } from '../../../../core/components/icon/icon.component';
 import { FeatureRequestService } from '../../../services/feature-request/feature-request.service';
-import { ProgressBarComponent } from '../../../../core/components/progress-bar/progress-bar.component';
 import { MatCardModule } from '@angular/material/card';
 import { FeatureTicketModel } from '../../../models/feature-ticket.model';
 import { DatePipe } from '@angular/common';
 import { ButtonComponent } from '../../../../core/components/button/button.component';
+import { NgxSkeletonLoaderComponent } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-feature-ticket-view',
   standalone: true,
-  imports: [MatToolbar, MatCardModule, IconComponent, ProgressBarComponent, DatePipe, ButtonComponent],
+  imports: [MatToolbar, MatCardModule, IconComponent, DatePipe, ButtonComponent, NgxSkeletonLoaderComponent],
   templateUrl: './feature-ticket-view.component.html',
   styleUrl: './feature-ticket-view.component.scss',
 })
@@ -24,6 +24,9 @@ export class FeatureTicketViewComponent implements OnInit {
 
   ticketData!: FeatureTicketModel;
 
+  skeletonLoaderHeaderConfig = { width: '250px', height: '40px', 'border-radius': '10px', 'background-color': '#00000029' }
+  skeletonLoaderConfig = { width: '250px', height: '20px', 'border-radius': '10px' }
+
   constructor(
     private route: ActivatedRoute,
     private featureRequestService: FeatureRequestService,
@@ -33,9 +36,7 @@ export class FeatureTicketViewComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.queryParamMap.get('id');
     const Subscription = this.featureRequestService.getTicket(id!).subscribe({
-      next: response => {
-        this.ticketData = response.data;
-      },
+      next: response => this.ticketData = response.data
     });
     this.destroyRef.onDestroy(() => {
       Subscription?.unsubscribe();

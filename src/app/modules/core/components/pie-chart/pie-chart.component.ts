@@ -4,12 +4,12 @@ import { PieChartComponentModel } from './pie-chart.component.model';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { ChartBuilderService } from '../../services/chart-builder/chart-builder.service';
 import Highcharts from 'highcharts';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { NgxSkeletonLoaderComponent } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-pie-chart',
   standalone: true,
-  imports: [MatCardModule, HighchartsChartModule, NgxSkeletonLoaderModule],
+  imports: [MatCardModule, HighchartsChartModule, NgxSkeletonLoaderComponent],
   providers: [ChartBuilderService],
   templateUrl: './pie-chart.component.html',
   styleUrl: './pie-chart.component.scss',
@@ -26,7 +26,7 @@ export class PieChartComponent implements OnChanges {
   // Holds the chart configuration options generated for Highcharts
   chartData!: Highcharts.Options;
 
-  skeletonLoaderConfig = { width: '320px', height: '320px', 'border-radius': '10px' }
+  skeletonLoaderConfig = { width: '320px', height: '320px', 'border-radius': '16px' }
 
   constructor(private chartBuilderService: ChartBuilderService) {}
 
