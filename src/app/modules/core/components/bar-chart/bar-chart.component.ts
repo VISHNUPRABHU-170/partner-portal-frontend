@@ -4,11 +4,12 @@ import Highcharts from 'highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { BarChartComponentModel } from './bar-chart.component.model';
 import { ChartBuilderService } from '../../services/chart-builder/chart-builder.service';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-bar-chart',
   standalone: true,
-  imports: [HighchartsChartModule, MatCardModule],
+  imports: [HighchartsChartModule, MatCardModule, NgxSkeletonLoaderModule],
   providers: [ChartBuilderService],
   templateUrl: './bar-chart.component.html',
   styleUrl: './bar-chart.component.scss',

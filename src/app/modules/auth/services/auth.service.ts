@@ -57,11 +57,11 @@ export class AuthService {
     const Subscription = this.restApiService.post(this.authLoginURL, data).subscribe({
       next: (response: HttpResponse<null>) => {
         this.spinnerBehaviorSubject.next(false);
+        this.toasterService.showSuccess(response.message);
         if (response.success === true) {
           this.storageService.setSessionItem('authToken', response.token);
           this.navigationService.navigate('partner-portal');
         }
-        this.toasterService.showSuccess(response.message);
       },
       error: (response: HttpErrorResponse) => {
         // Handle error response

@@ -25,6 +25,7 @@
     "@angular/router": "^18.2.0",
     "highcharts": "^12.1.0",
     "highcharts-angular": "^4.0.1",
+    "ngx-skeleton-loader": "^10.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
