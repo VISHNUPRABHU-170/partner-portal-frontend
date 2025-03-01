@@ -4,11 +4,12 @@ import { PieChartComponentModel } from './pie-chart.component.model';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { ChartBuilderService } from '../../services/chart-builder/chart-builder.service';
 import Highcharts from 'highcharts';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-pie-chart',
   standalone: true,
-  imports: [MatCardModule, HighchartsChartModule],
+  imports: [MatCardModule, HighchartsChartModule, NgxSkeletonLoaderModule],
   providers: [ChartBuilderService],
   templateUrl: './pie-chart.component.html',
   styleUrl: './pie-chart.component.scss',
