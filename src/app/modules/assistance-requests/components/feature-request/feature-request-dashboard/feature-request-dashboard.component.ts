@@ -35,6 +35,8 @@ export class FeatureRequestDashboardComponent implements OnInit {
 
   chartUtils = new ChartUtils();
 
+  isChartDataLoading = true;
+
   constructor(
     private navigationService: NavigationService,
     private featureRequestService: FeatureRequestService,
@@ -50,7 +52,10 @@ export class FeatureRequestDashboardComponent implements OnInit {
 
   subscribeToFeatureTicketStatus() {
     const Subscription = this.featureRequestService.ticketStatusBehaviorSubject.subscribe((response: any) => {
-      this.updateChartConfig(response);
+      if (response) {
+        this.updateChartConfig(response);
+        this.isChartDataLoading = false;
+      }
     });
     this.destroyRef.onDestroy(() => {
       Subscription?.unsubscribe();

@@ -7,10 +7,10 @@
     <div class="chart-container">
       <span>Overall Summary - Feature Request</span>
       <div class="charts">
-        <app-pie-chart [chartConfig]="awsChartConfig"></app-pie-chart>
-        <app-pie-chart [chartConfig]="azureChartConfig"></app-pie-chart>
-        <app-pie-chart [chartConfig]="gcpChartConfig"></app-pie-chart>
-        <app-pie-chart [chartConfig]="othersChartConfig"></app-pie-chart>
+        <app-pie-chart [chartConfig]="awsChartConfig" [isLoading]="isChartDataLoading"></app-pie-chart>
+        <app-pie-chart [chartConfig]="azureChartConfig" [isLoading]="isChartDataLoading"></app-pie-chart>
+        <app-pie-chart [chartConfig]="gcpChartConfig" [isLoading]="isChartDataLoading"></app-pie-chart>
+        <app-pie-chart [chartConfig]="othersChartConfig" [isLoading]="isChartDataLoading"></app-pie-chart>
       </div>
     </div>
     <div>

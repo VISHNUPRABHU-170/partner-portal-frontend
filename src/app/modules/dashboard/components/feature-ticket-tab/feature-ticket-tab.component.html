@@ -1,7 +1,7 @@
 <div class="app-tab">
   <div class="app-charts">
-    <app-pie-chart [chartConfig]="highPriorityChartConfig"></app-pie-chart>
-    <app-pie-chart [chartConfig]="mediumPriorityChartConfig"></app-pie-chart>
-    <app-pie-chart [chartConfig]="lowPriorityChartConfig"></app-pie-chart>
+    <app-pie-chart [chartConfig]="highPriorityChartConfig"  [isLoading]="isLoading"></app-pie-chart>
+    <app-pie-chart [chartConfig]="mediumPriorityChartConfig"  [isLoading]="isLoading"></app-pie-chart>
+    <app-pie-chart [chartConfig]="lowPriorityChartConfig" [isLoading]="isLoading"></app-pie-chart>
   </div>
 </div>

@@ -2,12 +2,10 @@
 <mat-card appearance="outlined" [class]="chartConfig.className ?? ''">
   <mat-card-header>{{ chartConfig.title }}</mat-card-header>
   <mat-card-content>
-    @if (chartData) {
+    @if (chartData && !isLoading) {
       <highcharts-chart [Highcharts]="Highcharts" [options]="chartData"></highcharts-chart>
-    }
-    @else {
-      <ngx-skeleton-loader appearance="circle" [theme]="{width: '320px', height: '320px', 'border-radius': '10px'}">
-      </ngx-skeleton-loader>
+    } @else {
+      <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader>
     }
   </mat-card-content>
 </mat-card>

@@ -9,7 +9,7 @@ import { ToasterService } from '../../../core/services/toaster/toaster.service';
 })
 export class SupportRequestService {
   endPoint = 'support';
-  ticketStatusBehaviorSubject = new BehaviorSubject<any>([]);
+  ticketStatusBehaviorSubject = new BehaviorSubject<any>(null);
   ticketPriorityStatusBehaviorSubject = new BehaviorSubject<any>(null);
   ticketsBehaviorSubject = new BehaviorSubject<SupportTicketModel[] | null>(null);
 
