@@ -12,6 +12,7 @@ export class SupportRequestService {
   ticketStatusBehaviorSubject = new BehaviorSubject<any>(null);
   ticketPriorityStatusBehaviorSubject = new BehaviorSubject<any>(null);
   ticketsBehaviorSubject = new BehaviorSubject<SupportTicketModel[] | null>(null);
+  isRequestingSending = new BehaviorSubject<boolean>(false);
 
   constructor(
     private restApiService: RestApiService,
@@ -66,12 +67,15 @@ export class SupportRequestService {
   }
 
   createTicket(data: SupportTicketModel) {
+    this.isRequestingSending.next(true);
     const Subscription = this.restApiService.post(this.endPoint, data).subscribe({
       next: (response: any) => {
         this.toasterService.showSuccess(response.message);
+        this.isRequestingSending.next(false);
       },
       error: (error: any) => {
         this.toasterService.showError(error.message);
+        this.isRequestingSending.next(false);
       },
     });
     this.destroyRef.onDestroy(() => {

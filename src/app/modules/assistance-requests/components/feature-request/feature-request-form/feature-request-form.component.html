@@ -3,6 +3,7 @@
     <app-icon [data]="backIconConfig"></app-icon>
     <span>Create Request</span>
   </mat-toolbar>
+  @if(isRequestingSending) { <mat-progress-bar mode="indeterminate"></mat-progress-bar>}
   <div class="content">
     <app-stepper [data]="stepperConfig" (event)="onSubmit($event)"></app-stepper>
   </div>
