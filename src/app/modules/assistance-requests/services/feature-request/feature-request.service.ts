@@ -110,7 +110,7 @@ export class FeatureRequestService {
       next: (response: any) => {
         this.isRequestingSending.next(false);
         this.toasterService.showSuccess(response.message);
-        this.navigationService.navigate('/partner-portal/assistance-requests/feature-dashboard');
+        this.navigationService.navigate('/partner-portal/assistance-requests/feature-request-dashboard');
       },
       error: (error: any) => {
         this.toasterService.showError(error.message);
