@@ -1,7 +1,7 @@
 import { SupportRequestService } from './../../../services/support-request/support-request.service';
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { backIconConfig, stepperConfig } from './config';
+import { backIconConfig, stepperConfig, stepperUpdateConfig } from './config';
 import { IconComponent } from '../../../../core/components/icon/icon.component';
 import { MatCardModule } from '@angular/material/card';
 import { StepperComponent } from '../../../../core/components/stepper/stepper.component';
@@ -38,6 +38,7 @@ export class SupportFormComponent implements OnInit {
 
   getTicketData(): void {
     this.isRequestingSending = true;
+    this.stepperConfig = stepperUpdateConfig;
     this.backIconConfig = { ...this.backIconConfig, routerLink: `/partner-portal/assistance-requests/support-ticket-view`, queryParams: { id: this.ticketID } };
     const Subscription = this.supportRequestService.getTicket(this.ticketID).subscribe(response => {
       this.ticketData = response.data;
