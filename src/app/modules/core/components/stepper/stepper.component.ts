@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, output, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { StepperComponentModel, StepperModel } from './stepper.component.model';
@@ -6,6 +6,8 @@ import { FormBuilderComponentModel } from '../form-builder/form-builder.componen
 import { FormBuilderService } from '../../services/form-builder/form-builder.service';
 import { DynamicFormControlDirective } from '../../directives/dynamic-form-control/dynamic-form-control.directive';
 import { MatButtonModule } from '@angular/material/button';
+import { FeatureTicketModel } from '../../../assistance-requests/models/feature-ticket.model';
+import { SupportTicketModel } from '../../../assistance-requests/models/support-ticket.model';
 
 @Component({
   selector: 'app-stepper',
@@ -14,9 +16,11 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.scss',
 })
-export class StepperComponent implements OnInit {
+export class StepperComponent implements OnInit, OnChanges {
   // Input property to accept stepper configuration data from the parent component.
   @Input() data!: StepperComponentModel;
+
+  @Input() formData!: SupportTicketModel | FeatureTicketModel;
 
   // Output event to emit the form values when the form is successfully submitted.
   event = output<any>();
@@ -41,6 +45,12 @@ export class StepperComponent implements OnInit {
       config.formGroup = [...config.formGroup, ...stepper.formControls];
     });
     this.formGroup = this.formBuilder.createFormGroup(this.formGroup, config);
+  }
+
+  ngOnChanges(): void {
+    if(this.formData) {
+      this.formGroup.patchValue(this.formData as any);
+    }
   }
 
   /**

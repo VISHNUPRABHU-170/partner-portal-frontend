@@ -1,5 +1,5 @@
 import { backIconConfig, stepperConfig } from './config';
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { IconComponent } from '../../../../core/components/icon/icon.component';
 import { MatCardModule } from '@angular/material/card';
@@ -7,6 +7,7 @@ import { StepperComponent } from '../../../../core/components/stepper/stepper.co
 import { FeatureTicketModel } from '../../../models/feature-ticket.model';
 import { FeatureRequestService } from '../../../services/feature-request/feature-request.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-feature-request-form',
@@ -19,12 +20,31 @@ export class FeatureRequestFormComponent implements OnInit {
   backIconConfig = backIconConfig;
   stepperConfig = stepperConfig;
 
+  ticketID!: string;
+  ticketData!: FeatureTicketModel;
   isRequestingSending = false;
 
-  constructor (private featureTicketService: FeatureRequestService) { }
+  constructor (
+    private route: ActivatedRoute,
+    private featureTicketService: FeatureRequestService,
+    private destroyRef: DestroyRef,
+  ) { }
 
   ngOnInit(): void {
     this.subscribeToIsRequestingSending();
+    this.ticketID = this.route.snapshot.queryParamMap.get('id')!;
+    if (this.ticketID) this.getTicketData();
+  }
+
+  getTicketData(): void {
+    this.isRequestingSending = true;
+    const Subscription = this.featureTicketService.getTicket(this.ticketID).subscribe(response => {
+      this.ticketData = response.data;
+      this.isRequestingSending = false;
+    });
+    this.destroyRef.onDestroy(() => {
+      Subscription?.unsubscribe();
+    });
   }
 
   subscribeToIsRequestingSending(): void {
@@ -34,6 +54,6 @@ export class FeatureRequestFormComponent implements OnInit {
   }
 
   onSubmit(data: FeatureTicketModel) {
-    this.featureTicketService.createTicket(data);
-  }
+    if (this.ticketID) this.featureTicketService.updateTicket(this.ticketID, data);
+    else this.featureTicketService.createTicket(data);  }
 }
