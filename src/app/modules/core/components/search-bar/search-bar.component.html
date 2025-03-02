@@ -1,0 +1,47 @@
+<div class="app-search-bar">
+
+  <app-icon [data]="{name: 'search', className: 'search-icon'}"></app-icon>
+
+  <input class="search-control" type="text" placeholder="Search for tickets..." [formControl]="searchControl">
+
+  @if(showCloseIcon) {
+  <app-icon [data]="{name: 'close'}" (event)="clearInput()"></app-icon>
+  }
+
+</div>
+
+@if(searchResult && !isSearching) {
+<div class="app-search-result">
+  <div class="result">
+    <span class="result-title">FEATURE TICKETS</span>
+    <div class="result-list">
+      @if(searchResult.featureTickets.length) {
+        @for(item of searchResult.featureTickets; track $index) {
+        <span class="result-item" (click)="onFeatureTicket(item._id)">{{ item.title }}</span>
+        }
+      } @else {
+        <span class="result-item">No Data Found</span>
+      }
+    </div>
+  </div>
+  <div class="result">
+    <span class="result-title">SUPPORT TICKETS</span>
+    <div class="result-list">
+      @if(searchResult.supportTickets.length) {
+        @for(item of searchResult.supportTickets; track $index) {
+        <span class="result-item" (click)="onSupportTicket(item._id)">{{ item.title }}</span>
+        }
+      } @else {
+        <span class="result-item">No Data Found</span>
+      }
+    </div>
+  </div>
+</div>
+}
+
+@if(isSearching) {
+  <div class="app-searching">
+    Searching...
+  </div>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
