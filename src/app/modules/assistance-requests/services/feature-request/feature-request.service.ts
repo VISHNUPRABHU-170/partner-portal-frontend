@@ -3,6 +3,7 @@ import { FeatureTicketModel } from '../../models/feature-ticket.model';
 import { RestApiService } from '../../../core/services/rest-api/rest-api.service';
 import { BehaviorSubject } from 'rxjs';
 import { ToasterService } from '../../../core/services/toaster/toaster.service';
+import { NavigationService } from '../../../core/services/navigation/navigation.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,10 +13,12 @@ export class FeatureRequestService {
   ticketStatusBehaviorSubject = new BehaviorSubject<any>(null);
   ticketPriorityStatusBehaviorSubject = new BehaviorSubject<any>(null);
   ticketsBehaviorSubject = new BehaviorSubject<FeatureTicketModel[] | null>(null);
+  isRequestingSending = new BehaviorSubject<boolean>(false);
 
   constructor(
     private restApiService: RestApiService,
     private toasterService: ToasterService,
+    private navigationService: NavigationService,
     private destroyRef: DestroyRef
   ) {}
 
@@ -66,12 +69,34 @@ export class FeatureRequestService {
   }
 
   createTicket(data: FeatureTicketModel) {
+    this.isRequestingSending.next(true);
     const Subscription = this.restApiService.post(this.endPoint, data).subscribe({
       next: (response: any) => {
         this.toasterService.showSuccess(response.message);
+        this.isRequestingSending.next(false);
       },
       error: (error: any) => {
         this.toasterService.showError(error.message);
+        this.isRequestingSending.next(false);
+      },
+    });
+    this.destroyRef.onDestroy(() => {
+      Subscription?.unsubscribe();
+    });
+  }
+
+  updateTicket(id: string, data: FeatureTicketModel) {
+    this.isRequestingSending.next(true);
+    const Subscription = this.restApiService.put(`${this.endPoint}/${id}`, data).subscribe({
+      next: (response: any) => {
+        this.toasterService.showSuccess(response.message);
+        this.isRequestingSending.next(false);
+        const queryParams = { id };
+        this.navigationService.navigate('/partner-portal/assistance-requests/feature-ticket-view', queryParams);
+      },
+      error: (error: any) => {
+        this.toasterService.showError(error.message);
+        this.isRequestingSending.next(false);
       },
     });
     this.destroyRef.onDestroy(() => {

@@ -1,1 +1,7 @@
-<p>chip-list works!</p>
+@if(data) {
+  <mat-chip-set>
+    @for(item of data; track $index) {
+      <mat-chip>{{ item.label }}</mat-chip>
+    }
+  </mat-chip-set>
+}

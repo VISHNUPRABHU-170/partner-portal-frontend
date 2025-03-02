@@ -1,9 +1,10 @@
 <div class="feature-request-form">
   <mat-toolbar>
     <app-icon [data]="backIconConfig"></app-icon>
-    <span>Create Request</span>
+    <span>{{ticketID ? 'Update Ticket' : 'Create Request'}}</span>
   </mat-toolbar>
+  @if(isRequestingSending) { <mat-progress-bar mode="indeterminate"></mat-progress-bar>}
   <div class="content">
-    <app-stepper [data]="stepperConfig" (event)="onSubmit($event)"></app-stepper>
+    <app-stepper [data]="stepperConfig" [formData]="ticketData" (event)="onSubmit($event)"></app-stepper>
   </div>
 </div>

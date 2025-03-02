@@ -36,4 +36,14 @@ export class RestApiService {
   post(endPoint: string, data: any): Observable<any> {
     return this.httpClient.post(`${this.backendBaseURL}/${endPoint}`, data);
   }
+
+  /**
+ * Makes a PUT request to the specified endpoint with the provided payload.
+ * @param endPoint - The API endpoint to call.
+ * @param data - The payload to send in the request body.
+ * @returns An Observable that emits the API response.
+ */
+  put(endPoint: string, data: any): Observable<any> {
+    return this.httpClient.put(`${this.backendBaseURL}/${endPoint}`, data);
+  }
 }

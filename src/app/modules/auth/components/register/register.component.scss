@@ -7,7 +7,7 @@
   align-items: center;
 
   .mdc-card {
-    padding: 5px 0px 20px;
+    padding: 0px 0px 20px;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
@@ -30,5 +30,10 @@
     font-weight: 500;
     color: #2c0e47;
     padding: 25px 0px;
+  }
+
+  mat-progress-bar {
+    width: 97%;
+    border-radius: 16px;
   }
 }

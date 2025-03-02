@@ -1,4 +1,3 @@
-import { ProgressBarComponent } from './../../../core/components/progress-bar/progress-bar.component';
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { LinkComponent } from '../../../core/components/link/link.component';
@@ -6,11 +5,12 @@ import { logInLinkConfig, progressBarConfig, registerFormConfig } from './config
 import { FormBuilderComponent } from '../../../core/components/form-builder/form-builder.component';
 import { AuthService } from '../../services/auth.service';
 import { RegisterDataModel } from '../../models/register.model';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [MatCardModule, FormBuilderComponent, LinkComponent, ProgressBarComponent],
+  imports: [MatCardModule, FormBuilderComponent, LinkComponent, MatProgressBarModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })

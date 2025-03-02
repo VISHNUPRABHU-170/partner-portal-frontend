@@ -9,12 +9,15 @@ import { ActivatedRoute } from '@angular/router';
 import { SupportTicketModel } from '../../../models/support-ticket.model';
 import { DatePipe } from '@angular/common';
 import { ButtonComponent } from '../../../../core/components/button/button.component';
+import { ChipComponent } from '../../../../core/components/chip/chip.component';
 import { NgxSkeletonLoaderComponent } from 'ngx-skeleton-loader';
+import { ChipComponentModel } from '../../../../core/components/chip/chip.component.model';
+import { NavigationService } from '../../../../core/services/navigation/navigation.service';
 
 @Component({
   selector: 'app-support-ticket-view',
   standalone: true,
-  imports: [MatToolbar, MatCardModule, IconComponent, DatePipe, ButtonComponent, NgxSkeletonLoaderComponent],
+  imports: [MatToolbar, MatCardModule, IconComponent, DatePipe, ButtonComponent, NgxSkeletonLoaderComponent, ChipComponent],
   templateUrl: './support-ticket-view.component.html',
   styleUrl: './support-ticket-view.component.scss',
 })
@@ -24,6 +27,7 @@ export class SupportTicketViewComponent implements OnInit {
   updateButtonConfig = updateButtonConfig;
   previewLinkConfig = previewLinkConfig;
 
+  ticketID!: string;
   ticketData!: SupportTicketModel;
 
   skeletonLoaderHeaderConfig = { width: '250px', height: '40px', 'border-radius': '10px', 'background-color': '#00000029' };
@@ -32,12 +36,13 @@ export class SupportTicketViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private supportRequestService: SupportRequestService,
-    private destroyRef: DestroyRef
+    private destroyRef: DestroyRef,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.queryParamMap.get('id');
-    const Subscription = this.supportRequestService.getTicket(id!).subscribe({
+    this.ticketID = this.route.snapshot.queryParamMap.get('id')!;
+    const Subscription = this.supportRequestService.getTicket(this.ticketID).subscribe({
       next: response => this.ticketData = response.data
     });
     this.destroyRef.onDestroy(() => {
@@ -50,6 +55,11 @@ export class SupportTicketViewComponent implements OnInit {
   }
 
   onUpdate(): void {
-    // TODO
+    const queryParams = { id: this.ticketID };
+    this.navigationService.navigate('/partner-portal/assistance-requests/support-form', queryParams);
+  }
+
+  prepareChipConfig(label: string): ChipComponentModel {
+    return { label };
   }
 }
