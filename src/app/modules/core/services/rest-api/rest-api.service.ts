@@ -13,7 +13,7 @@ export class RestApiService {
   //The base URL for the backend API. This must be set before making any API calls.
   backendBaseURL!: string;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor (private httpClient: HttpClient) { }
 
   /**
    * Makes a GET request to the specified endpoint with optional query parameters.
@@ -45,5 +45,15 @@ export class RestApiService {
  */
   put(endPoint: string, data: any): Observable<any> {
     return this.httpClient.put(`${this.backendBaseURL}/${endPoint}`, data);
+  }
+
+  /**
+ * Makes a DELETE request to the specified endpoint with the provided payload.
+ * @param endPoint - The API endpoint to call.
+ * @param data - The payload to send in the request body.
+ * @returns An Observable that emits the API response.
+ */
+  delete(endPoint: string): Observable<any> {
+    return this.httpClient.delete(`${this.backendBaseURL}/${endPoint}`);
   }
 }

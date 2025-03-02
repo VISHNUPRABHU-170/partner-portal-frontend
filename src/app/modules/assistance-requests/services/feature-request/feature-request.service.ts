@@ -103,4 +103,22 @@ export class FeatureRequestService {
       Subscription?.unsubscribe();
     });
   }
+
+  deleteTicket(id: string): void {
+    this.isRequestingSending.next(true);
+    const Subscription = this.restApiService.delete(`${this.endPoint}/${id}`).subscribe({
+      next: (response: any) => {
+        this.isRequestingSending.next(false);
+        this.toasterService.showSuccess(response.message);
+        this.navigationService.navigate('/partner-portal/assistance-requests/feature-dashboard');
+      },
+      error: (error: any) => {
+        this.toasterService.showError(error.message);
+        this.isRequestingSending.next(false);
+      },
+    });
+    this.destroyRef.onDestroy(() => {
+      Subscription?.unsubscribe();
+    });
+  }
 }

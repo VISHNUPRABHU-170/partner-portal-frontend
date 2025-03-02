@@ -1,58 +1,68 @@
-  <div class="support-ticket-view">
+<div class="support-ticket-view">
 
-    <mat-toolbar>
-      <div>
-        <app-icon [data]="backIconConfig"></app-icon>
-        <span>
-          @if(ticketData) { {{ ticketData.title }}}
-          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderHeaderConfig"></ngx-skeleton-loader> }
-        </span>
-      </div>
-      <app-button [data]="updateButtonConfig" (event)="onUpdate()"></app-button>
-    </mat-toolbar>
+  <mat-toolbar>
+    <div>
+      <app-icon [data]="backIconConfig"></app-icon>
+      <span>
+        @if(ticketData) { {{ ticketData.title }}}
+        @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderHeaderConfig"></ngx-skeleton-loader> }
+      </span>
+    </div>
+    <app-icon [matMenuTriggerFor]="menu" [data]="{name: 'more_vert', className: 'icon-medium'}"></app-icon>
+  </mat-toolbar>
 
-    <mat-card appearance="outlined">
-      <mat-card-content>
+  @if(isRequestingSending) { <mat-progress-bar mode="indeterminate"></mat-progress-bar>}
 
-        <span class="content">
-          <span class="title">Feature Title: </span>
-          @if(ticketData) { {{ ticketData.title }}}
-          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
-        </span>
+  <mat-card appearance="outlined">
+    <mat-card-content>
 
-        <span class="content">
-          <span class="title">Feature Description: </span>
-          @if(ticketData) { {{ ticketData.description }}}
-          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
-        </span>
+      <span class="content">
+        <span class="title">Feature Title: </span>
+        @if(ticketData) { {{ ticketData.title }}}
+        @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
+      </span>
 
-        <span class="content">
-          <span class="title">Status: </span>
-          @if(ticketData) { <app-chip [data]="prepareChipConfig(ticketData.status)"></app-chip>}
-          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
-        </span>
+      <span class="content">
+        <span class="title">Feature Description: </span>
+        @if(ticketData) { {{ ticketData.description }}}
+        @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
+      </span>
 
-        <span class="content">
-          <span class="title">Priority: </span>
-          @if(ticketData) { <app-chip [data]="prepareChipConfig(ticketData.priority)"></app-chip>}
-          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
-        </span>
+      <span class="content">
+        <span class="title">Status: </span>
+        @if(ticketData) { <app-chip [data]="prepareChipConfig(ticketData.status)"></app-chip>}
+        @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
+      </span>
 
-        <span class="content">
-          <span class="title">Created At: </span>
-          @if(ticketData) { {{ ticketData.createdAt | date }}}
-          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
-        </span>
+      <span class="content">
+        <span class="title">Priority: </span>
+        @if(ticketData) { <app-chip [data]="prepareChipConfig(ticketData.priority)"></app-chip>}
+        @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
+      </span>
 
-        <span class="content">
-          <span class="title">Deadline: </span>
-          @if(ticketData) { {{ ticketData.deadLine | date }}}
-          @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
-        </span>
+      <span class="content">
+        <span class="title">Created At: </span>
+        @if(ticketData) { {{ ticketData.createdAt | date }}}
+        @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
+      </span>
 
-        <!-- <app-link [data]="previewLinkConfig" (event)="onPreview()"></app-link> -->
+      <span class="content">
+        <span class="title">Deadline: </span>
+        @if(ticketData) { {{ ticketData.deadLine | date }}}
+        @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
+      </span>
 
-      </mat-card-content>
-    </mat-card>
+      <!-- <app-link [data]="previewLinkConfig" (event)="onPreview()"></app-link> -->
+
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<mat-menu #menu="matMenu">
+  <div class="menu-item" (click)="onUpdate()">
+    Edit <app-icon [data]="{name: 'edit'}"></app-icon>
   </div>
-
+  <div class="menu-item" (click)="onDelete()">
+    Delete <app-icon [data]="{name: 'delete'}"></app-icon>
+  </div>
+</mat-menu>

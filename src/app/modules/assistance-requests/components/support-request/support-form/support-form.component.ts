@@ -38,8 +38,7 @@ export class SupportFormComponent implements OnInit {
 
   getTicketData(): void {
     this.isRequestingSending = true;
-    backIconConfig.routerLink = `/partner-portal/assistance-requests/support-ticket-view`;
-    backIconConfig.queryParams = { id: this.ticketID };
+    this.backIconConfig = { ...this.backIconConfig, routerLink: `/partner-portal/assistance-requests/support-ticket-view`, queryParams: { id: this.ticketID } };
     const Subscription = this.supportRequestService.getTicket(this.ticketID).subscribe(response => {
       this.ticketData = response.data;
       this.isRequestingSending = false
