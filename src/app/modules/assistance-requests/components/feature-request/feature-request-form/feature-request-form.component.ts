@@ -38,6 +38,8 @@ export class FeatureRequestFormComponent implements OnInit {
 
   getTicketData(): void {
     this.isRequestingSending = true;
+    backIconConfig.routerLink = `/partner-portal/assistance-requests/feature-ticket-view`;
+    backIconConfig.queryParams = { id: this.ticketID };
     const Subscription = this.featureTicketService.getTicket(this.ticketID).subscribe(response => {
       this.ticketData = response.data;
       this.isRequestingSending = false;
