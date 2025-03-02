@@ -5,7 +5,7 @@ export interface FeatureTicketModel {
   priority: string;
   createdAt: string;
   deadLine: string;
-  tags: string;
+  tags: string[];
 }
 
 export interface CloudColor {

@@ -1,5 +1,6 @@
 <div class="app-registration">
   <mat-card appearance="outlined">
+    @if (showSpinner) { <mat-progress-bar mode="indeterminate"></mat-progress-bar> }
     <mat-card-header>REGISTER</mat-card-header>
     <mat-card-content>
       <app-form-builder [data]="registerFormConfig" (event)="onRegister($event)"></app-form-builder>
@@ -9,8 +10,3 @@
     </mat-card-content>
   </mat-card>
 </div>
-
-<!--Spinner-->
-@if (showSpinner) {
-  <app-progress-bar [data]="progressBarConfig"></app-progress-bar>
-}

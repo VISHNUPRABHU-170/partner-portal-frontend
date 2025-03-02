@@ -28,13 +28,13 @@
 
         <span class="content">
           <span class="title">Cloud Provider: </span>
-          @if(ticketData) { {{ ticketData.cloudProvider }}}
+          @if(ticketData) { <app-chip [data]="prepareChipConfig(ticketData.cloudProvider)"></app-chip>}
           @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
         </span>
 
         <span class="content">
           <span class="title">Priority: </span>
-          @if(ticketData) { {{ ticketData.priority }}}
+          @if(ticketData) { <app-chip [data]="prepareChipConfig(ticketData.priority)"></app-chip>}
           @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
         </span>
 
@@ -52,7 +52,7 @@
 
         <span class="content">
           <span class="title">Tags: </span>
-          @if(ticketData) { {{ ticketData.tags }} }
+          @if(ticketData) { <app-chip-list [data]="prepareChipListConfig(ticketData.tags)"></app-chip-list> }
           @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
         </span>
 

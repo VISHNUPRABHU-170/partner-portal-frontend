@@ -28,13 +28,13 @@
 
         <span class="content">
           <span class="title">Status: </span>
-          @if(ticketData) { {{ ticketData.status }}}
+          @if(ticketData) { <app-chip [data]="prepareChipConfig(ticketData.status)"></app-chip>}
           @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
         </span>
 
         <span class="content">
           <span class="title">Priority: </span>
-          @if(ticketData) { {{ ticketData.priority }}}
+          @if(ticketData) { <app-chip [data]="prepareChipConfig(ticketData.priority)"></app-chip>}
           @else { <ngx-skeleton-loader appearance="circle" [theme]="skeletonLoaderConfig"></ngx-skeleton-loader> }
         </span>
 

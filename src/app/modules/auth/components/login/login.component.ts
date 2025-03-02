@@ -4,13 +4,13 @@ import { LinkComponent } from '../../../core/components/link/link.component';
 import { loginFormConfig, progressBarConfig, registerLinkConfig } from './config';
 import { FormBuilderComponent } from '../../../core/components/form-builder/form-builder.component';
 import { AuthService } from '../../services/auth.service';
-import { ProgressBarComponent } from '../../../core/components/progress-bar/progress-bar.component';
 import { LoginDataModel } from '../../models/login.model';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatCardModule, FormBuilderComponent, LinkComponent, ProgressBarComponent],
+  imports: [MatCardModule, FormBuilderComponent, LinkComponent, MatProgressBarModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })

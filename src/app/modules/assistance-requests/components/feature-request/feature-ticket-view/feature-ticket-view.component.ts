@@ -1,3 +1,4 @@
+import { ChipListComponent } from './../../../../core/components/chip-list/chip-list.component';
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { MatToolbar } from '@angular/material/toolbar';
 import { ActivatedRoute } from '@angular/router';
@@ -9,11 +10,13 @@ import { FeatureTicketModel } from '../../../models/feature-ticket.model';
 import { DatePipe } from '@angular/common';
 import { ButtonComponent } from '../../../../core/components/button/button.component';
 import { NgxSkeletonLoaderComponent } from 'ngx-skeleton-loader';
+import { ChipComponent } from '../../../../core/components/chip/chip.component';
+import { ChipComponentModel } from '../../../../core/components/chip/chip.component.model';
 
 @Component({
   selector: 'app-feature-ticket-view',
   standalone: true,
-  imports: [MatToolbar, MatCardModule, IconComponent, DatePipe, ButtonComponent, NgxSkeletonLoaderComponent],
+  imports: [MatToolbar, MatCardModule, IconComponent, DatePipe, ButtonComponent, NgxSkeletonLoaderComponent, ChipComponent, ChipListComponent],
   templateUrl: './feature-ticket-view.component.html',
   styleUrl: './feature-ticket-view.component.scss',
 })
@@ -44,4 +47,12 @@ export class FeatureTicketViewComponent implements OnInit {
   }
 
   onUpdate(): void {}
+
+  prepareChipConfig(label: string): ChipComponentModel {
+    return { label };
+  }
+
+  prepareChipListConfig(label: string[]): ChipComponentModel[] {
+    return [...label.map(this.prepareChipConfig)];
+  }
 }
