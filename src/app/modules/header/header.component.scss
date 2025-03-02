@@ -7,4 +7,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .app-search-bar {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 400px;
+    padding: 2px 10px;
+
+    .search-control {
+      font-size: 18px;
+      border: 0;
+      outline: none;
+      width: 87%;
+      color: rgb(81, 80, 80);
+    }
+
+    app-icon {
+      margin-top: 6px;
+    }
+  }
 }
