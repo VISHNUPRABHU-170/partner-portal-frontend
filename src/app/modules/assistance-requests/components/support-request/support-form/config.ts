@@ -81,9 +81,30 @@ const titleStepperConfig: StepperModel = {
   formControls: [titleControlConfig, descriptionControlConfig],
 };
 
+const selectStatusConfig: SelectComponentModel = {
+  label: 'Status',
+  options: [
+    { key: 'to-do', value: 'To Do' },
+    { key: 'in-progress', value: 'In Progress' },
+    { key: 'completed', value: 'Completed' }
+  ],
+};
+
+const selectStatusControlConfig: FormControlModel = {
+  name: 'status',
+  config: selectStatusConfig,
+  componentType: ComponentType.SELECT,
+  validators: [FormValidators.REQUIRED],
+};
+
 const requestTypeStepperConfig: StepperModel = {
   label: 'Issue Timeline',
   formControls: [selectPriorityLevelControlConfig, timeLineControlConfig],
+};
+
+const requestTypeUpdateStepperConfig: StepperModel = {
+  label: 'Issue Timeline',
+  formControls: [selectPriorityLevelControlConfig, selectStatusControlConfig, timeLineControlConfig],
 };
 
 const attachmentsStepperConfig: StepperModel = {
@@ -93,4 +114,8 @@ const attachmentsStepperConfig: StepperModel = {
 
 export const stepperConfig: StepperComponentModel = {
   stepper: [titleStepperConfig, requestTypeStepperConfig, attachmentsStepperConfig],
+};
+
+export const stepperUpdateConfig: StepperComponentModel = {
+  stepper: [titleStepperConfig, requestTypeUpdateStepperConfig, attachmentsStepperConfig],
 };
