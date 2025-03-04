@@ -1,8 +1,18 @@
 <mat-toolbar>
+
   <span>Partner Portal</span>
+
   <div class="app-search-bar">
     <app-icon [data]="{name: 'search', className: 'search-icon'}"></app-icon>
-    <input class="search-control" type="text" placeholder="Search for tickets..." (focus)="openSearchResult()">
+    <input
+      readonly
+      type="text"
+      placeholder="Search for tickets..."
+      (focus)="openSearchResult()"
+      class="search-control"
+    >
   </div>
+
   <app-icon title="Log Out" [data]="logOutIconConfig" (event)="onLogOut()"></app-icon>
+
 </mat-toolbar>

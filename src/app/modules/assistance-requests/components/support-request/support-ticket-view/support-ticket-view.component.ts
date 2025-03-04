@@ -14,6 +14,7 @@ import { ChipComponentModel } from '../../../../core/components/chip/chip.compon
 import { NavigationService } from '../../../../core/services/navigation/navigation.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-support-ticket-view',
@@ -30,25 +31,30 @@ export class SupportTicketViewComponent implements OnInit {
   previewLinkConfig = previewLinkConfig;
 
   ticketID!: string;
-  ticketData!: SupportTicketModel;
+  ticketData!: SupportTicketModel | undefined;
 
   isRequestingSending = false;
 
   skeletonLoaderHeaderConfig = { width: '250px', height: '40px', 'border-radius': '10px', 'background-color': '#00000029' };
-  skeletonLoaderConfig = { width: '250px', height: '20px', 'border-radius': '10px' }
+  skeletonLoaderConfig = { width: '250px', height: '20px', 'border-radius': '10px' };
 
-  constructor(
+  constructor (
     private route: ActivatedRoute,
     private supportRequestService: SupportRequestService,
     private destroyRef: DestroyRef,
     private navigationService: NavigationService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    this.subscribeToQueryParams();
     this.subscribeToIsRequestingSending();
-    this.ticketID = this.route.snapshot.queryParamMap.get('id')!;
-    const Subscription = this.supportRequestService.getTicket(this.ticketID).subscribe({
-      next: response => this.ticketData = response.data
+  }
+
+  subscribeToQueryParams() {
+    const Subscription = this.route.queryParams.subscribe((params) => {
+      this.ticketData = undefined;
+      this.ticketID = params['id'];
+      this.supportRequestService.getTicket(this.ticketID).pipe(take(1)).subscribe((response) => this.ticketData = response.data);
     });
     this.destroyRef.onDestroy(() => {
       Subscription?.unsubscribe();

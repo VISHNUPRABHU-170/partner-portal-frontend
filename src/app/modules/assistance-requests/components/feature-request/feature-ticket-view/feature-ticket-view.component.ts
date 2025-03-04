@@ -14,6 +14,7 @@ import { ChipComponentModel } from '../../../../core/components/chip/chip.compon
 import { NavigationService } from '../../../../core/services/navigation/navigation.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-feature-ticket-view',
@@ -29,7 +30,7 @@ export class FeatureTicketViewComponent implements OnInit {
   updateButtonConfig = updateButtonConfig;
 
   ticketID!: string;
-  ticketData!: FeatureTicketModel;
+  ticketData!: FeatureTicketModel | undefined;
 
   isRequestingSending = false;
 
@@ -44,10 +45,15 @@ export class FeatureTicketViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.subscribeToQueryParams();
     this.subscribeToIsRequestingSending();
-    this.ticketID = this.route.snapshot.queryParamMap.get('id')!;
-    const Subscription = this.featureRequestService.getTicket(this.ticketID).subscribe({
-      next: response => this.ticketData = response.data
+  }
+
+  subscribeToQueryParams() {
+    const Subscription = this.route.queryParams.subscribe((params) => {
+      this.ticketData = undefined;
+      this.ticketID = params['id'];
+      this.featureRequestService.getTicket(this.ticketID).pipe(take(1)).subscribe((response) => this.ticketData = response.data);
     });
     this.destroyRef.onDestroy(() => {
       Subscription?.unsubscribe();
