@@ -2,7 +2,7 @@
 
   <app-icon [data]="{name: 'search', className: 'search-icon'}"></app-icon>
 
-  <input class="search-control" type="text" placeholder="Search for tickets..." [formControl]="searchControl">
+  <input #inputRef type="text" placeholder="Search for tickets..." class="search-control" [formControl]="searchControl">
 
   @if(showCloseIcon) {
   <app-icon [data]="{name: 'close'}" (event)="clearInput()"></app-icon>
@@ -20,7 +20,7 @@
         <span class="result-item" (click)="onFeatureTicket(item._id)">{{ item.title }}</span>
         }
       } @else {
-        <span class="result-item">No Data Found</span>
+        <span class="result-empty">No Data Found</span>
       }
     </div>
   </div>
@@ -32,7 +32,7 @@
         <span class="result-item" (click)="onSupportTicket(item._id)">{{ item.title }}</span>
         }
       } @else {
-        <span class="result-item">No Data Found</span>
+        <span class="result-empty">No Data Found</span>
       }
     </div>
   </div>

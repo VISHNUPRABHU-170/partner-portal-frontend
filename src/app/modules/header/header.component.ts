@@ -44,6 +44,10 @@ export class HeaderComponent {
       overlayRef.dispose();
     });
 
-    overlayRef.attach(new ComponentPortal(SearchBarComponent, this.viewContainerRef));
+    const searchComponentRef = overlayRef.attach(new ComponentPortal(SearchBarComponent, this.viewContainerRef));
+
+    searchComponentRef.instance.resultSelected.subscribe((result) => {
+      overlayRef.dispose();
+    });
   }
 }
